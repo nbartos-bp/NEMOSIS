@@ -35,7 +35,9 @@ setup = {'DISPATCHLOAD': None,
          'INTERCONNECTORCONSTRAINT': None,
          'MARKET_PRICE_THRESHOLDS': None,
          'PARTICIPANTS': None,
-         'FCASREGTRK': None}
+         'FCASREGTRK': None,
+         'FCASREGIONRECOVERY': None
+         }
 
 search_type = {'DISPATCHLOAD': 'start_to_end',
                'TRADINGLOAD': 'start_to_end',
@@ -69,7 +71,9 @@ search_type = {'DISPATCHLOAD': 'start_to_end',
                'INTERCONNECTORCONSTRAINT': 'all',
                'MARKET_PRICE_THRESHOLDS': 'all',
                'PARTICIPANTS':'all',
-               'FCASREGTRK': 'start_to_end'}
+               'FCASREGTRK': 'start_to_end',
+               'FCASREGIONRECOVERY': 'start_to_end'
+                }
 
 filter = {'DISPATCHLOAD': filters.filter_on_settlementdate,
           'TRADINGLOAD': filters.filter_on_settlementdate,
@@ -103,7 +107,9 @@ filter = {'DISPATCHLOAD': filters.filter_on_settlementdate,
           'INTERCONNECTORCONSTRAINT': filters.filter_on_effective_date,
           'MARKET_PRICE_THRESHOLDS': filters.filter_on_effective_date,
           'PARTICIPANTS': None,
-          'FCASREGTRK':filters.filter_on_settlementdate }
+          'FCASREGTRK':filters.filter_on_settlementdate,
+          'FCASREGIONRECOVERY': filters.filter_on_last_changed 
+              }
 
 finalise = {'DISPATCHLOAD': None,
             'TRADINGLOAD': None,
@@ -148,8 +154,11 @@ finalise = {'DISPATCHLOAD': None,
             'INTERCONNECTORCONSTRAINT': [query_wrapers.most_recent_records_before_start_time,
                                          query_wrapers.drop_duplicates_by_primary_key],
             'MARKET_PRICE_THRESHOLDS': None,
-            'PARTICIPANTS': None,
-            'FCASREGTRK': None }
+            'PARTICIPANTS': [query_wrapers.convert_date_column_to_datetime_format,
+                             query_wrapers.most_recent_records_before_start_time],
+            'FCASREGTRK': None,
+            'FCASREGIONRECOVERY': None
+            }
 
 date_gen = {'MMS': date_generators.year_and_month_gen,
             'FCAS': date_generators.year_month_day_index_gen}

@@ -31,7 +31,8 @@ names = {'DISPATCHLOAD': 'PUBLIC_DVD_DISPATCHLOAD',
          'TRADINGINTERCONNECT': 'PUBLIC_DVD_TRADINGINTERCONNECT',
          'MARKET_PRICE_THRESHOLDS': 'PUBLIC_DVD_MARKET_PRICE_THRESHOLDS',
          'PARTICIPANTS': 'PUBLIC_DVD_PARTICIPANT',
-         'FCASREGTRK': 'PUBLIC_DVD_SET_FCAS_REGULATION_TRK' }
+         'FCASREGTRK': 'PUBLIC_DVD_SET_FCAS_REGULATION_TRK', 
+         'FCASREGIONRECOVERY': 'PUBLIC_DVD_SETFCASREGIONRECOVERY'}
 
 table_types = {'DISPATCHLOAD': 'MMS',
                'DUDETAILSUMMARY': 'MMS',
@@ -65,7 +66,8 @@ table_types = {'DISPATCHLOAD': 'MMS',
                'TRADINGINTERCONNECT': 'MMS',
                'MARKET_PRICE_THRESHOLDS': 'MMS',
                'PARTICIPANTS': 'MMS',
-               'FCASREGTRK': 'MMS'
+               'FCASREGTRK': 'MMS',
+               'FCASREGIONRECOVERY': 'MMS'
                }
 
 return_tables = list(names.keys())
@@ -120,7 +122,8 @@ data_url = {'DISPATCHLOAD': 'aemo_data_url',
             'TRADINGINTERCONNECT': 'aemo_data_url',
             'MARKET_PRICE_THRESHOLDS': 'aemo_data_url',
             'PARTICIPANTS': 'aemo_data_url',
-            'FCASREGTRK': 'aemo_data_url'
+            'FCASREGTRK': 'aemo_data_url',
+            'FCASREGIONRECOVERY': 'aemo_data_url'
             }
 
 filterable_cols = ['DUID', 'REGIONID', 'STATIONID', 'PARTICIPANTID', 'STARTTYPE', 'SCHEDULE_TYPE', 'GENCONID',
@@ -143,7 +146,8 @@ table_columns = {
                    'SEMIDISPATCHCAP', 'AVAILABILITY'],
 
     'TRADINGPRICE': ['SETTLEMENTDATE', 'REGIONID', 'RRP', 'RAISE6SECRRP', 'RAISE60SECRRP',
-                      'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP', 'LOWER60SECRRP', 'LOWERREGRRP', 'PRICE_STATUS'],
+                      'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP', 'LOWER60SECRRP', 'LOWER5MINRRP', 'LOWERREGRRP', 
+                      'PRICE_STATUS'],
 
     'TRADINGREGIONSUM': ['SETTLEMENTDATE', 'REGIONID', 'TOTALDEMAND',
                           'AVAILABLEGENERATION', 'AVAILABLELOAD', 'DEMANDFORECAST', 'DISPATCHABLEGENERATION',
@@ -247,7 +251,10 @@ table_columns = {
     'PARTICIPANTS': ['LASTCHANGED', 'PARTICIPANTID', 'NAME'],
     
     'FCASREGTRK': ['SETTLEMENTDATE','VERSIONNO', 'INTERVAL_DATETIME', 'CONSTRAINTID', 'CMPF', 'CRMPF', 'RECOVERY_FACTOR_CMPF', 
-                   'RECOVERY_FACTOR_CRMPF', 'LASTCHANGED']}
+                   'RECOVERY_FACTOR_CRMPF', 'LASTCHANGED'],
+    'FCASREGIONRECOVERY': ['SETTLEMENTDATE','VERSIONNO','BIDTYPE','REGIONID','PERIODID','GENERATORREGIONENERGY',
+                           'CUSTOMERREGIONENERGY','REGIONRECOVERY','LASTCHANGED']
+    }
 
 table_primary_keys = {'DISPATCHCONSTRAINT': ['CONSTRAINTID', 'GENCONID_EFFECTIVEDATE', 'GENCONID_VERSIONNO',
                                              'SETTLEMENTDATE', 'INTERVENTION'],
@@ -285,7 +292,9 @@ table_primary_keys = {'DISPATCHCONSTRAINT': ['CONSTRAINTID', 'GENCONID_EFFECTIVE
                       'PLANTSTATS': ['Month', 'DUID'],
                       'MARKET_PRICE_THRESHOLDS': ['EFFECTIVEDATE', 'VERSIONNO'],
                       'PARTICIPANTS': ['PARTICIPANTID'],
-                      'FCASREGTRK': ['CONSTRAINTID', 'INTERVAL_DATETIME', 'SETTLEMENTDATE', 'VERSIONNO']  }
+                      'FCASREGTRK': ['CONSTRAINTID', 'INTERVAL_DATETIME', 'SETTLEMENTDATE', 'VERSIONNO'],
+                      'FCASREGIONRECOVERY': ['BIDTYPE', 'PERIODID', 'REGIONID', 'SETTLEMENTDATE', 'VERSIONNO']
+                      }
 
 effective_date_group_col = {'SPDREGIONCONSTRAINT': ['GENCONID'],
                             'SPDCONNECTIONPOINTCONSTRAINT': ['GENCONID'],
@@ -300,7 +309,8 @@ effective_date_group_col = {'SPDREGIONCONSTRAINT': ['GENCONID'],
                             'MNSP_PEROFFER': ['LINKID'],
                             'MNSP_DAYOFFER': ['LINKID'],
                             'DUDETAIL': ['DUID'],
-                            'MARKET_PRICE_THRESHOLDS': []}
+                            'MARKET_PRICE_THRESHOLDS': [],
+                            'PARTICIPANTS':['PARTICIPANTID'] }
 
 primary_date_columns = {'DISPATCHLOAD': 'SETTLEMENTDATE',
                         'TRADINGLOAD': 'SETTLEMENTDATE',
@@ -334,7 +344,9 @@ primary_date_columns = {'DISPATCHLOAD': 'SETTLEMENTDATE',
                         'FCAS_4s_SCADA_MAP': None,
                         'MARKET_PRICE_THRESHOLDS': 'EFFECTIVEDATE',
                         'PARTICIPANTS': 'LASTCHANGED',
-                        'FCASREGTRK': 'LASTCHANGED' }
+                        'FCASREGTRK': 'LASTCHANGED',
+                        'FCASREGIONRECOVERY': 'LASTCHANGED'
+                        }
 
 months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 
