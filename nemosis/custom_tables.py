@@ -212,7 +212,7 @@ def select_highest_version_number(data, primary_key):
     data['VERSIONNO'] = pd.to_numeric(data['VERSIONNO'])
     data = data.sort_values(['VERSIONNO'])
     data['VERSIONNO'] = data['VERSIONNO'].astype(int).astype(str)
-    data = data.groupby([col for col in primary_key if col != 'INTERVENTION'], as_index=False).last()
+    data = data.groupby([col for col in primary_key if col != 'VERSIONNO'], as_index=False).last()
     return data
 
 
