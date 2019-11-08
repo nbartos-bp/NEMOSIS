@@ -184,4 +184,10 @@ method_map = {'DISPATCHLOAD': dynamic_data_compiler,
               'MNSP_INTERCONNECTOR': dynamic_data_compiler,
               'INTERCONNECTOR': dynamic_data_compiler,
               'INTERCONNECTORCONSTRAINT': dynamic_data_compiler,
-              'MARKET_PRICE_THRESHOLDS': dynamic_data_compiler}
+              'MARKET_PRICE_THRESHOLDS': dynamic_data_compiler,
+              'PARTICIPANTS': dynamic_data_compiler,
+              'FCASREGTRK': dynamic_data_compiler,
+              'FCASREGIONRECOVERY': dynamic_data_compiler,
+              'PREDISPATCH_PRICE': dynamic_data_compiler,
+              'P5_PRICE': dynamic_data_compiler
+              }
