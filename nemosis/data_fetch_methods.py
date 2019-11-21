@@ -83,7 +83,7 @@ def dynamic_data_fetch_loop(start_search, start_time, end_time, table_name, raw_
                       format(table_name, year, month, day, index))
             # Check what headers the data has.
             headers = pd.read_csv(path_and_name, skiprows=[0], nrows=1).columns
-            if defaults.table_types[table_name] == 'MMS':
+            if defaults.table_types[table_name] in ['MMS','PD_ALL']:
                 # Remove columns from the table column list if they are not in the header, this deals with the fact AEMO
                 # has added and removed columns over time.
                 columns = [column for column in defaults.table_columns[table_name] if column in headers]

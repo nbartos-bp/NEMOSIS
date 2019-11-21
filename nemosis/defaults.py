@@ -33,7 +33,7 @@ names = {'DISPATCHLOAD': 'PUBLIC_DVD_DISPATCHLOAD',
          'PARTICIPANTS': 'PUBLIC_DVD_PARTICIPANT',
          'FCASREGTRK': 'PUBLIC_DVD_SET_FCAS_REGULATION_TRK',
          'FCASREGIONRECOVERY': 'PUBLIC_DVD_SETFCASREGIONRECOVERY',
-         'PREDISPATCH_PRICE': 'PUBLIC_DVD_PREDISPATCHPRICE_D',
+         'PREDISPATCH_PRICE': 'PUBLIC_DVD_PREDISPATCHPRICE',
          'P5_PRICE': 'PUBLIC_DVD_P5MIN_REGIONSOLUTION'
          }
 
@@ -71,7 +71,7 @@ table_types = {'DISPATCHLOAD': 'MMS',
                'PARTICIPANTS': 'MMS',
                'FCASREGTRK': 'MMS',
                'FCASREGIONRECOVERY': 'MMS',
-               'PREDISPATCH_PRICE': 'MMS',
+               'PREDISPATCH_PRICE': 'PD_ALL',
                'P5_PRICE': 'MMS'
                }
 
@@ -94,6 +94,8 @@ static_table_url = {
     'Generators and Scheduled Loads': 'https://www.aemo.com.au/-/media/Files/Electricity/NEM/Participant_Information/NEM-Registration-and-Exemption-List.xls'}
 
 aemo_data_url = 'http://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{}/MMSDM_{}_{}/MMSDM_Historical_Data_SQLLoader/DATA/{}.zip'
+
+predispatch_all_url = 'http://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{}/MMSDM_{}_{}/MMSDM_Historical_Data_SQLLoader/PREDISP_ALL_DATA/{}.zip'
 
 fcas_4_url = 'http://www.nemweb.com.au/Reports/Current/Causer_Pays/FCAS_{}{}{}{}.zip'
 
@@ -130,7 +132,7 @@ data_url = {'DISPATCHLOAD': 'aemo_data_url',
             'PARTICIPANTS': 'aemo_data_url',
             'FCASREGTRK': 'aemo_data_url',
             'FCASREGIONRECOVERY': 'aemo_data_url',
-            'PREDISPATCH_PRICE': 'aemo_data_url',
+            'PREDISPATCH_PRICE': 'predispatch_all_url',
             'P5_PRICE': 'aemo_data_url'
             }
 
@@ -268,7 +270,7 @@ table_columns = {
                           'RAISE6SECRRP', 'RAISE60SECRRP', 'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP',
                           'LOWER60SECRRP', 'LOWER5MINRRP', 'LOWERREGRRP','LASTCHANGED'],
 
-    'P5_PRICE': ['RUN_DATETIME', 'INTERVENTION', 'INTERVAL_DATETIME ', 'REGIONID', 'RRP', 'EXCESSGENERATION', 'RAISE6SECRRP',
+    'P5_PRICE': ['RUN_DATETIME', 'INTERVENTION', 'INTERVAL_DATETIME', 'REGIONID', 'RRP', 'EXCESSGENERATION', 'RAISE6SECRRP',
                  'RAISE60SECRRP', 'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP', 'LOWER60SECRRP', 'LOWER5MINRRP', 'LOWERREGRRP',
                  'LASTCHANGED']
                 #'TOTALDEMAND', 'AVAILABLEGENERATION', 'AVAILABLELOAD', 'DEMANDFORECAST', 'DISPATCHABLEGENERATION',

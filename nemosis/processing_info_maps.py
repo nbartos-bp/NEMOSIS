@@ -169,10 +169,13 @@ finalise = {'DISPATCHLOAD': None,
             }
 
 date_gen = {'MMS': date_generators.year_and_month_gen,
+            'PD_ALL': date_generators.year_and_month_gen,
             'FCAS': date_generators.year_month_day_index_gen}
 
 write_filename = {'MMS': write_file_names.write_file_names,
+                  'PD_ALL': write_file_names.write_file_names,
                   'FCAS': write_file_names.write_file_names_fcas}
 
 downloader = {'MMS': downloader.run,
+              'PD_ALL': downloader.run_pd_all,
               'FCAS': downloader.run_fcas4s}
