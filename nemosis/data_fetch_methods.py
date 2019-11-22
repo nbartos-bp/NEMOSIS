@@ -83,7 +83,7 @@ def dynamic_data_fetch_loop(start_search, start_time, end_time, table_name, raw_
                       format(table_name, year, month, day, index))
             # Check what headers the data has.
             headers = pd.read_csv(path_and_name, skiprows=[0], nrows=1).columns
-            if defaults.table_types[table_name] == 'MMS':
+            if defaults.table_types[table_name] in ['MMS','PD_ALL']:
                 # Remove columns from the table column list if they are not in the header, this deals with the fact AEMO
                 # has added and removed columns over time.
                 columns = [column for column in defaults.table_columns[table_name] if column in headers]
@@ -184,4 +184,10 @@ method_map = {'DISPATCHLOAD': dynamic_data_compiler,
               'MNSP_INTERCONNECTOR': dynamic_data_compiler,
               'INTERCONNECTOR': dynamic_data_compiler,
               'INTERCONNECTORCONSTRAINT': dynamic_data_compiler,
-              'MARKET_PRICE_THRESHOLDS': dynamic_data_compiler}
+              'MARKET_PRICE_THRESHOLDS': dynamic_data_compiler,
+              'PARTICIPANTS': dynamic_data_compiler,
+              'FCASREGTRK': dynamic_data_compiler,
+              'FCASREGIONRECOVERY': dynamic_data_compiler,
+              'PREDISPATCH_PRICE': dynamic_data_compiler,
+              'P5_PRICE': dynamic_data_compiler
+              }

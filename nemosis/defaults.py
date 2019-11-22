@@ -32,7 +32,11 @@ names = {'DISPATCHLOAD': 'PUBLIC_DVD_DISPATCHLOAD',
          'MARKET_PRICE_THRESHOLDS': 'PUBLIC_DVD_MARKET_PRICE_THRESHOLDS',
          'PARTICIPANTS': 'PUBLIC_DVD_PARTICIPANT',
          'FCASREGTRK': 'PUBLIC_DVD_SET_FCAS_REGULATION_TRK',
-         'FCASREGIONRECOVERY': 'PUBLIC_DVD_SETFCASREGIONRECOVERY'}
+         'FCASREGIONRECOVERY': 'PUBLIC_DVD_SETFCASREGIONRECOVERY',
+         'PREDISPATCH_PRICE': 'PUBLIC_DVD_PREDISPATCHPRICE',
+         'P5_PRICE': 'PUBLIC_DVD_P5MIN_REGIONSOLUTION'
+         }
+
 
 table_types = {'DISPATCHLOAD': 'MMS',
                'DUDETAILSUMMARY': 'MMS',
@@ -67,7 +71,9 @@ table_types = {'DISPATCHLOAD': 'MMS',
                'MARKET_PRICE_THRESHOLDS': 'MMS',
                'PARTICIPANTS': 'MMS',
                'FCASREGTRK': 'MMS',
-               'FCASREGIONRECOVERY': 'MMS'
+               'FCASREGIONRECOVERY': 'MMS',
+               'PREDISPATCH_PRICE': 'PD_ALL',
+               'P5_PRICE': 'MMS'
                }
 
 return_tables = list(names.keys())
@@ -76,7 +82,8 @@ display_as_AMEO = ['DISPATCHLOAD', 'DUDETAILSUMMARY', 'DUDETAIL', 'DISPATCHCONST
                    'DISPATCHPRICE', 'SPDREGIONCONSTRAINT', 'SPDCONNECTIONPOINTCONSTRAINT', 'SPDINTERCONNECTORCONSTRAINT',
                    'BIDPEROFFER_D', 'DISPATCHINTERCONNECTORRES', 'BIDDAYOFFER_D', 'DISPATCHREGIONSUM', 'FCAS_4_SECOND',
                    'ELEMENTS_FCAS_4_SECOND', 'VARIABLES_FCAS_4_SECOND', 'Generators and Scheduled Loads', 'TRADINGLOAD',
-                   'TRADINGPRICE', 'TRADINGREGIONSUM', 'TRADINGINTERCONNECT','MARKET_PRICE_THRESHOLDS','PARTICIPANTS','FCASREGTRK']
+                   'TRADINGPRICE', 'TRADINGREGIONSUM', 'TRADINGINTERCONNECT','MARKET_PRICE_THRESHOLDS','PARTICIPANTS','FCASREGTRK',
+                   'FCASREGIONRECOVERY','PREDISPATCH_PRICE', 'P5_PRICE']
 
 display_as_Custom = ['FCAS_4s_SCADA_MAP', 'PLANTSTATS']
 
@@ -88,6 +95,8 @@ static_table_url = {
     'Generators and Scheduled Loads': 'https://www.aemo.com.au/-/media/Files/Electricity/NEM/Participant_Information/NEM-Registration-and-Exemption-List.xls'}
 
 aemo_data_url = 'http://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{}/MMSDM_{}_{}/MMSDM_Historical_Data_SQLLoader/DATA/{}.zip'
+
+predispatch_all_url = 'http://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{}/MMSDM_{}_{}/MMSDM_Historical_Data_SQLLoader/PREDISP_ALL_DATA/{}.zip'
 
 fcas_4_url = 'http://www.nemweb.com.au/Reports/Current/Causer_Pays/FCAS_{}{}{}{}.zip'
 
@@ -123,7 +132,9 @@ data_url = {'DISPATCHLOAD': 'aemo_data_url',
             'MARKET_PRICE_THRESHOLDS': 'aemo_data_url',
             'PARTICIPANTS': 'aemo_data_url',
             'FCASREGTRK': 'aemo_data_url',
-            'FCASREGIONRECOVERY': 'aemo_data_url'
+            'FCASREGIONRECOVERY': 'aemo_data_url',
+            'PREDISPATCH_PRICE': 'predispatch_all_url',
+            'P5_PRICE': 'aemo_data_url'
             }
 
 filterable_cols = ['DUID', 'REGIONID', 'STATIONID', 'PARTICIPANTID', 'STARTTYPE', 'SCHEDULE_TYPE', 'GENCONID',
@@ -253,8 +264,23 @@ table_columns = {
 
     'FCASREGTRK': ['SETTLEMENTDATE','VERSIONNO', 'INTERVAL_DATETIME', 'CONSTRAINTID', 'CMPF', 'CRMPF', 'RECOVERY_FACTOR_CMPF',
                    'RECOVERY_FACTOR_CRMPF', 'LASTCHANGED'],
+
     'FCASREGIONRECOVERY': ['SETTLEMENTDATE','VERSIONNO','BIDTYPE','REGIONID','PERIODID','GENERATORREGIONENERGY',
-                           'CUSTOMERREGIONENERGY','REGIONRECOVERY','LASTCHANGED']
+                           'CUSTOMERREGIONENERGY','REGIONRECOVERY','LASTCHANGED'],
+
+    'PREDISPATCH_PRICE': ['PREDISPATCHSEQNO', 'RUNNO', 'DATETIME', 'REGIONID', 'PERIODID', 'INTERVENTION', 'RRP',
+                          'RAISE6SECRRP', 'RAISE60SECRRP', 'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP',
+                          'LOWER60SECRRP', 'LOWER5MINRRP', 'LOWERREGRRP','LASTCHANGED'],
+
+    'P5_PRICE': ['RUN_DATETIME', 'INTERVENTION', 'INTERVAL_DATETIME', 'REGIONID', 'RRP', 'EXCESSGENERATION', 'RAISE6SECRRP',
+                 'RAISE60SECRRP', 'RAISE5MINRRP', 'RAISEREGRRP', 'LOWER6SECRRP', 'LOWER60SECRRP', 'LOWER5MINRRP', 'LOWERREGRRP',
+                 'LASTCHANGED']
+                #'TOTALDEMAND', 'AVAILABLEGENERATION', 'AVAILABLELOAD', 'DEMANDFORECAST', 'DISPATCHABLEGENERATION',
+                #'DISPATCHABLELOAD', 'NETINTERCHANGE', 'LOWER5MINLOCALDISPATCH', 'LOWER60SECLOCALDISPATCH', 'LOWER6SECLOCALDISPATCH',
+                #'RAISE5MINLOCALDISPATCH', 'RAISE60SECLOCALDISPATCH', 'RAISE6SECLOCALDISPATCH', 'AGGREGATEDISPATCHERROR',
+                #'INITIALSUPPLY, 'CLEAREDSUPPLY', 'LOWERREGDISPATCH', 'LOWERREGLOCALDISPATCH', 'RAISEREGDISPATCH',
+                #'RAISEREGLOCALDISPATCH', 'TOTALINTERMITTENTGENERATION', 'DEMAND_AND_NONSCHEDGEN', 'UIGF'
+                #'SEMISCHEDULE_CLEAREDMW', 'SEMISCHEDULE_COMPLIANCEMW]
     }
 
 table_primary_keys = {'DISPATCHCONSTRAINT': ['CONSTRAINTID', 'GENCONID_EFFECTIVEDATE', 'GENCONID_VERSIONNO',
@@ -294,7 +320,9 @@ table_primary_keys = {'DISPATCHCONSTRAINT': ['CONSTRAINTID', 'GENCONID_EFFECTIVE
                       'MARKET_PRICE_THRESHOLDS': ['EFFECTIVEDATE', 'VERSIONNO'],
                       'PARTICIPANTS': ['PARTICIPANTID'],
                       'FCASREGTRK': ['CONSTRAINTID', 'INTERVAL_DATETIME', 'SETTLEMENTDATE', 'VERSIONNO'],
-                      'FCASREGIONRECOVERY': ['BIDTYPE', 'PERIODID', 'REGIONID', 'SETTLEMENTDATE', 'VERSIONNO']
+                      'FCASREGIONRECOVERY': ['BIDTYPE', 'PERIODID', 'REGIONID', 'SETTLEMENTDATE', 'VERSIONNO'],
+                      'PREDISPATCH_PRICE': ['DATETIME', 'REGIONID'],
+                      'P5_PRICE': ['INTERVAL_DATETIME', 'REGIONID', 'RUN_DATETIME']
                       }
 
 effective_date_group_col = {'SPDREGIONCONSTRAINT': ['GENCONID'],
@@ -311,7 +339,8 @@ effective_date_group_col = {'SPDREGIONCONSTRAINT': ['GENCONID'],
                             'MNSP_DAYOFFER': ['LINKID'],
                             'DUDETAIL': ['DUID'],
                             'MARKET_PRICE_THRESHOLDS': [],
-                            'PARTICIPANTS':['PARTICIPANTID'] }
+                            'PARTICIPANTS':['PARTICIPANTID']
+                            }
 
 primary_date_columns = {'DISPATCHLOAD': 'SETTLEMENTDATE',
                         'TRADINGLOAD': 'SETTLEMENTDATE',
@@ -346,7 +375,9 @@ primary_date_columns = {'DISPATCHLOAD': 'SETTLEMENTDATE',
                         'MARKET_PRICE_THRESHOLDS': 'EFFECTIVEDATE',
                         'PARTICIPANTS': 'LASTCHANGED',
                         'FCASREGTRK': 'LASTCHANGED',
-                        'FCASREGIONRECOVERY': 'LASTCHANGED'
+                        'FCASREGIONRECOVERY': 'LASTCHANGED',
+                        'PREDISPATCH_PRICE': 'LASTCHANGED',
+                        'P5_PRICE': 'LASTCHANGED'
                         }
 
 months = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']

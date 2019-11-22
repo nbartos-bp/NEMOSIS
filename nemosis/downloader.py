@@ -18,6 +18,20 @@ def run(year, month, day, index, filename, down_load_to):
     except:
         print('Warning {} not downloaded'.format(filename))
 
+def run_pd_all(year, month, day, index, filename, down_load_to):
+    """This function"""
+
+    url = defaults.predispatch_all_url
+    # Add the year and month information to the generic AEMO data url
+    url_formatted = format_aemo_url(url, year, month, filename)
+
+    # Perform the download, unzipping saving of the file
+    try:
+        download_unzip_csv(url_formatted, down_load_to, filename)
+    except:
+        print('Warning {} not downloaded'.format(filename))
+
+
 
 def run_fcas4s(year, month, day, index, filename, down_load_to):
     """This function"""
