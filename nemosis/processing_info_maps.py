@@ -113,8 +113,8 @@ filter = {'DISPATCHLOAD': filters.filter_on_settlementdate,
           'PARTICIPANTS': None,
           'FCASREGTRK':filters.filter_on_settlementdate,
           'FCASREGIONRECOVERY': filters.filter_on_last_changed,
-          'PREDISPATCH_PRICE': filters.filter_on_last_changed,
-          'P5_PRICE': filters.filter_on_last_changed
+          'PREDISPATCH_PRICE': filters.filter_on_predispatchseqno,
+          'P5_PRICE': filters.filter_on_run_datetime
               }
 
 finalise = {'DISPATCHLOAD': None,
