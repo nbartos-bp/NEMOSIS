@@ -33,7 +33,13 @@ setup = {'DISPATCHLOAD': None,
          'MNSP_INTERCONNECTOR': None,
          'INTERCONNECTOR': None,
          'INTERCONNECTORCONSTRAINT': None,
-         'MARKET_PRICE_THRESHOLDS': None}
+         'MARKET_PRICE_THRESHOLDS': None,
+         'PARTICIPANTS': None,
+         'FCASREGTRK': None,
+         'FCASREGIONRECOVERY': None,
+         'PREDISPATCH_PRICE': None,
+         'P5_PRICE': None
+         }
 
 search_type = {'DISPATCHLOAD': 'start_to_end',
                'TRADINGLOAD': 'start_to_end',
@@ -65,7 +71,13 @@ search_type = {'DISPATCHLOAD': 'start_to_end',
                'MNSP_INTERCONNECTOR': 'all',
                'INTERCONNECTOR': 'all',
                'INTERCONNECTORCONSTRAINT': 'all',
-               'MARKET_PRICE_THRESHOLDS': 'all'}
+               'MARKET_PRICE_THRESHOLDS': 'all',
+               'PARTICIPANTS':'all',
+               'FCASREGTRK': 'start_to_end',
+               'FCASREGIONRECOVERY': 'start_to_end',
+               'PREDISPATCH_PRICE': 'start_to_end',
+               'P5_PRICE': 'start_to_end'
+                }
 
 date_cols = {'DISPATCHLOAD': ['SETTLEMENTDATE'],
              'TRADINGLOAD': ['SETTLEMENTDATE'],
@@ -129,7 +141,13 @@ filter = {'DISPATCHLOAD': filters.filter_on_settlementdate,
           'MNSP_INTERCONNECTOR': filters.filter_on_effective_date,
           'INTERCONNECTOR': filters.filter_on_last_changed,
           'INTERCONNECTORCONSTRAINT': filters.filter_on_effective_date,
-          'MARKET_PRICE_THRESHOLDS': filters.filter_on_effective_date}
+          'MARKET_PRICE_THRESHOLDS': filters.filter_on_effective_date,
+          'PARTICIPANTS': None,
+          'FCASREGTRK':filters.filter_on_settlementdate,
+          'FCASREGIONRECOVERY': filters.filter_on_last_changed,
+          'PREDISPATCH_PRICE': filters.filter_on_predispatchseqno,
+          'P5_PRICE': filters.filter_on_run_datetime
+              }
 
 finalise = {'DISPATCHLOAD': None,
             'TRADINGLOAD': None,
@@ -173,13 +191,23 @@ finalise = {'DISPATCHLOAD': None,
                                query_wrapers.drop_duplicates_by_primary_key],
             'INTERCONNECTORCONSTRAINT': [query_wrapers.most_recent_records_before_start_time,
                                          query_wrapers.drop_duplicates_by_primary_key],
-            'MARKET_PRICE_THRESHOLDS': None}
+            'MARKET_PRICE_THRESHOLDS': None,
+            'PARTICIPANTS': [query_wrapers.convert_date_column_to_datetime_format,
+                             query_wrapers.most_recent_records_before_start_time],
+            'FCASREGTRK': None,
+            'FCASREGIONRECOVERY': None,
+            'PREDISPATCH_PRICE': None,
+            'P5_PRICE': None
+            }
 
 date_gen = {'MMS': date_generators.year_and_month_gen,
+            'PD_ALL': date_generators.year_and_month_gen,
             'FCAS': date_generators.year_month_day_index_gen}
 
 write_filename = {'MMS': write_file_names.write_file_names,
+                  'PD_ALL': write_file_names.write_file_names,
                   'FCAS': write_file_names.write_file_names_fcas}
 
 downloader = {'MMS': downloader.run,
+              'PD_ALL': downloader.run_pd_all,
               'FCAS': downloader.run_fcas4s}
