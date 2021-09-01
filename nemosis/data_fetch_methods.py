@@ -684,4 +684,9 @@ _method_map = {'DISPATCHLOAD': _dynamic_data_wrapper_for_gui,
                'MNSP_INTERCONNECTOR': _dynamic_data_wrapper_for_gui,
                'INTERCONNECTOR': _dynamic_data_wrapper_for_gui,
                'INTERCONNECTORCONSTRAINT': _dynamic_data_wrapper_for_gui,
-               'MARKET_PRICE_THRESHOLDS': _dynamic_data_wrapper_for_gui}
+               'MARKET_PRICE_THRESHOLDS': _dynamic_data_wrapper_for_gui,
+               'PARTICIPANTS': _dynamic_data_wrapper_for_gui,
+               'FCASREGTRK': _dynamic_data_wrapper_for_gui,
+               'FCASREGIONRECOVERY': _dynamic_data_wrapper_for_gui,
+               'PREDISPATCH_PRICE': _dynamic_data_wrapper_for_gui,
+               'P5_PRICE': _dynamic_data_wrapper_for_gui}

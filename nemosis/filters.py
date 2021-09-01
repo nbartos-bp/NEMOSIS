@@ -105,3 +105,18 @@ def date_2_interval_datetime(date, period):
                             day=datetime_obj.day, hour=4)
     datetime_obj = datetime_obj + timedelta(minutes=(float(period)*30))
     return datetime_obj
+
+# Not tested, balance power addition.
+def filter_on_run_datetime(data, start_time, end_time):
+    data['RUN_DATETIME'] = pd.to_datetime(data['RUN_DATETIME'], format='%Y/%m/%d %H:%M:%S')
+    data = data[(data['RUN_DATETIME'] > start_time) &(data['RUN_DATETIME'] < end_time)]
+    return data
+
+# Not tested, balance power addition.
+def filter_on_predispatchseqno(data, start_time, end_time):
+    data['RUN_DATETIME'] = pd.to_datetime(data['PREDISPATCHSEQNO'].str[:-2])
+    data['HOURS'] =  4.0 + (pd.to_numeric(data['PREDISPATCHSEQNO'].str[-2:]) - 1)*0.5
+    data['RUN_DATETIME'] += pd.to_timedelta(data['HOURS'], unit = 'hours')
+    data = data[(data['RUN_DATETIME'] > start_time) & (data['RUN_DATETIME'] < end_time)]
+    data.drop(columns=['HOURS'], inplace=True)
+    return data

@@ -60,3 +60,9 @@ def convert_genconid_effectivedate_to_datetime_format(data, start_time, table_na
     if 'GENCONID_EFFECTIVEDATE' in data.columns:
         data['GENCONID_EFFECTIVEDATE'] = pd.to_datetime(data['GENCONID_EFFECTIVEDATE'])
     return data
+
+def convert_date_column_to_datetime_format(data, start_time, table_name):
+    primary_date_column = defaults.primary_date_columns[table_name]
+    if primary_date_column in data.columns:
+        data[primary_date_column] = pd.to_datetime(data[primary_date_column])
+    return data
