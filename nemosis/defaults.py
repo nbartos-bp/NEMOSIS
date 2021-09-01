@@ -78,7 +78,7 @@ table_types = {'FCAS Providers': 'STATICXL',
                'P5_PRICE': 'MMS'
                }
 
-dynamic_tables = [table for table, type in table_types.items() if type in ['MMS', 'FCAS']]
+dynamic_tables = [table for table, type in table_types.items() if type in ['MMS', 'FCAS', 'PD_ALL']]
 
 return_tables = list(names.keys())
 
