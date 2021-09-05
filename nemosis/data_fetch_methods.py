@@ -268,6 +268,8 @@ def _get_read_function(fformat, table_type):
             func = _read_mms_csv
         elif table_type == 'FCAS':
             func = _read_fcas_causer_pays_csv
+        elif table_type == 'PD_ALL':
+            func = _read_mms_csv
     return func
 
 
