@@ -268,6 +268,8 @@ def _get_read_function(fformat, table_type):
             func = _read_mms_csv
         elif table_type == 'FCAS':
             func = _read_fcas_causer_pays_csv
+        elif table_type == 'PD_ALL':
+            func = _read_mms_csv
     return func
 
 
@@ -543,12 +545,12 @@ def _determine_columns_and_read_csv(table_name, csv_file, read_csv_func,
         type = None
     else:
         type = str
-    if _defaults.table_types[table_name] == 'MMS' and not read_all_columns:
+    if _defaults.table_types[table_name] in ['MMS', 'PD_ALL'] and not read_all_columns:
         headers = read_csv_func(csv_file, nrows=1).columns.tolist()
         columns = [column for column in _defaults.table_columns[table_name]
                    if column in headers]
         data = read_csv_func(csv_file, usecols=columns, dtype=type)
-    elif _defaults.table_types[table_name] == 'MMS' and read_all_columns:
+    elif _defaults.table_types[table_name] in ['MMS', 'PD_ALL'] and read_all_columns:
         data = read_csv_func(csv_file, dtype=type)
     else:
         columns = _defaults.table_columns[table_name]
