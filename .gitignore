@@ -25,3 +25,6 @@ env/*
 nemosis/raw_aemo_data/*
 NEMOSIS.exe
 nemosis/smoke_tests.py
+.vscode/launch.json
+.vscode/settings.json
+.python-version
